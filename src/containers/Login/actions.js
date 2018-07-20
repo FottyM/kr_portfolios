@@ -22,10 +22,9 @@ export function loginfailed(error) {
   }
 }
 
-export function setCredentials({ email, password }) {
+export function setLoginCredentials(value) {
   return {
-    type: type.SET_USER_CREDENTIALS,
-    email,
-    password
+    type: type.SET_LOGIN_CREDENTIALS,
+    payload: value
   }
 }

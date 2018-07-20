@@ -2,49 +2,48 @@ import * as type from './constants'
 
 const initialState = {
   email: '',
+  first_name: '',
+  last_name: '',
   password: '',
-  loading: false,
   error: null,
   message: '',
-  token: null
+  loading: false
 }
 
-const reducers = (state = initialState, action) => {
 
+const reducer = (state = initialState, action) => {
   switch (action.type) {
-  case type.REQUEST_LOGIN:
+
+  case type.REQUEST_REGISTER:
     return {
       ...state,
       loading: true
     }
 
-  case type.LOGIN_SUCCESS:
+  case type.REGISTER_SUCCESS:
     return {
       ...state,
       loading: false,
       message: action.message
     }
 
-  case type.LOGIN_FAILED:
+  case type.REGISTER_FAILED:
     return {
       ...state,
       loading: false,
       error: action.error
     }
 
-  case type.SET_LOGIN_CREDENTIALS:
+  case type.SET_REGISTER_CREDENTIALS:
     return {
       ...state,
+      loading: false,
       ...action.payload
     }
 
   default:
-    return {
-      ...state
-    }
+    return state
   }
-
-
 }
 
-export default reducers
+export default reducer

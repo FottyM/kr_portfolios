@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-// import isEmpty from 'lodash/isEmpty'
 import isNil from 'lodash/isNil'
 
-import { setCredentials, requestLogin } from './actions'
+import { setLoginCredentials, requestLogin } from './actions'
+import Input from '../../components/Input'
 class Login extends Component {
 
   static propTypes = {
@@ -22,36 +22,35 @@ class Login extends Component {
   }
 
   handleChange = ({ target }) => {
-
-    const { email, password } = this.props.credentials
-    if (target.name === 'email') {
-      this.props.dispatch(setCredentials({ email: target.value, password }))
-    } else this.props.dispatch(setCredentials({ email, password: target.value }))
-
+    const val = { [target.name]: target.value }
+    this.props.dispatch(setLoginCredentials(val))
   }
 
   componentDidMount = () => {
-    const { error, token } = this.props.credentials
+    const { token } = this.props.credentials
     if (!isNil(token)) {
       this.props.history.push('/portfolios')
     }
   }
 
   render() {
-
+    const { email, password } = this.props.credentials
     return (
-      <div className="row">
-        <div className="col-4 offset-4 bg-dark text-white p-3 rounded">
-          <form onSubmit={this.login} >
-            <div className="form-group">
-              <label htmlFor="email">Email address</label>
-              <input type="email" className="form-control" name='email' id="email" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.handleChange} />
-              <small id="emailHelp" className="form-text text-muted">We will never share your email with anyone else.</small>
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input type="password" className="form-control" name='password' id="password" placeholder="Password" onChange={this.handleChange} />
-            </div>
+      <div className="row" style={{ marginTop: 100 }}>
+        <div className="col-10 col-md-6 offset-1 offset-md-3 bg-light p-3 rounded">
+          <h2 className='text-danger text-center py-1'>Login</h2>
+          <form onSubmit={this.login} onChange={this.handleChange}  >
+            
+            <Input id='email' label='Email address' 
+              name='email' placeholder='Enter email' 
+              type='email' value={email} 
+              onChange={this.handleChange} />
+            
+            <Input id='password' name='password' 
+              label='Password' type='password' 
+              placeholder='Enter password' value={password} 
+              onChange={this.handleChange} />
+              
             <button type="submit" className="btn btn-primary" onClick={this.login}>Login</button>
           </form>
         </div>

@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Input /> renders without crashing 1`] = `
+<div
+  className="form-group"
+>
+  <label
+    htmlFor="id"
+  >
+    label
+  </label>
+  <input
+    className="form-control"
+    id="id"
+    name="name"
+    onChange={[Function]}
+    placeholder=""
+    type="text"
+    value="value"
+  />
+</div>
+`;
