@@ -8,10 +8,10 @@ export function requestLogin(email, password) {
   }
 }
 
-export function loginSuccess(message) {
+export function loginSuccess(response) {
   return {
     type: type.LOGIN_SUCCESS,
-    message
+    payload: response
   }
 }
 

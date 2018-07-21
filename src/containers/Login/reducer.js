@@ -6,7 +6,8 @@ const initialState = {
   loading: false,
   error: null,
   message: '',
-  token: null
+  access_token: null,
+
 }
 
 const reducers = (state = initialState, action) => {
@@ -22,7 +23,7 @@ const reducers = (state = initialState, action) => {
     return {
       ...state,
       loading: false,
-      message: action.message
+      ...action.payload
     }
 
   case type.LOGIN_FAILED:

@@ -5,7 +5,7 @@ import store from './store/store'
 import 'bootstrap/dist/css/bootstrap.css'
 
 
-import App from './App'
+import App from './containers/App/App'
 import registerServiceWorker from './registerServiceWorker'
 
 const MainApp = () =>

@@ -10,9 +10,10 @@ const api = (email, password) => axios.post('http://localhost:3001/auth/login', 
 function* login(action) {
   try {
     const response = yield call(api, action.email, action.password)
-    yield put(loginSuccess(response))
+    const { access_token } = response.data
+    yield localStorage.setItem('access_token', access_token)
+    yield put(loginSuccess(response.data))
   } catch (error) {
-
     yield put(loginfailed({
       error: {
         ...get(error.response, 'data', null),
