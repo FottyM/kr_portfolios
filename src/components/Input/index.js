@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Input = ({ id, type, name, value, onChange, label, placeholder }) => {
+const Input = ({ id, type, name, value, onChange, label, placeholder, ...rest }) => {
   return (
     <div className="form-group">
       <label htmlFor={id}>{label}</label>
       <input
+        {...rest}
         type={type}
         className="form-control"
         name={name}
@@ -19,7 +20,7 @@ const Input = ({ id, type, name, value, onChange, label, placeholder }) => {
 
 Input.propTypes = {
   name: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(['text', 'email', 'password']),
+  type: PropTypes.oneOf(['text', 'email', 'password', 'number']),
   id: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,

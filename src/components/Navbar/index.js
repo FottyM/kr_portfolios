@@ -13,9 +13,6 @@ const Navbar = () => {
           <li className="nav-item active">
             <Link className="nav-link" to="/portfolios">Home <span className="sr-only">(current)</span></Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/">Link</Link>
-          </li>
           <li className="nav-item dropdown">
             <Link className="nav-link dropdown-toggle" to="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Dropdown
@@ -31,10 +28,6 @@ const Navbar = () => {
             <Link className="nav-link disabled" to="/">Disabled</Link>
           </li>
         </ul>
-        {/* <form className="form-inline my-2 my-lg-0">
-          <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-          <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form> */}
       </div>
     </nav>
   )

@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import Jumbotron from '../../components/Jumbotron'
 import Login from '../../containers/Login'
 import Register from '../../containers/Register'
-import SecureRoute from '../../components/SecoureRoute'
+import SecureRoute from '../../components/SecureRoute'
 import Portfolios from '../../containers/Portfolios'
 import Navbar from '../../components/Navbar'
 import { tokenSelector } from './selectors'
@@ -25,10 +25,21 @@ class App extends Component {
         <div>
           <Navbar />
           <Switch>
-            <Route exact={true} path='/' component={Jumbotron} />
-            <Route path='/login' component={Login} />
-            <Route path='/register' component={Register} />
-            <SecureRoute path='/portfolios' component={Portfolios} loggedIn={loggedIn} />
+            <Route
+              exact={true}
+              path='/'
+              component={Jumbotron} />
+            <Route
+              path='/login'
+              component={Login} />
+            <Route
+              path='/register'
+              component={Register} />
+            <SecureRoute
+              path='/portfolios'
+              component={Portfolios}
+              loggedIn={loggedIn}
+            />
           </Switch>
         </div>
       </Router>

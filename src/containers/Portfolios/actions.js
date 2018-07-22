@@ -47,3 +47,33 @@ export function deletePortfolioError(error) {
     error
   }
 }
+
+export function reqSavePortfolio(data) {
+  return {
+    type: type.REQUEST_SAVE_PORTFOLIO,
+    data,
+    user_id,
+    token
+  }
+}
+
+export function savePortfolioSuccess(message) {
+  return {
+    type: type.PORTFOLIO_SAVED_SUCCESS,
+    message
+  }
+}
+
+export function savePortfolioError(error) {
+  return {
+    type: type.PORTFOLIO_SAVED_FAILED,
+    error
+  }
+}
+
+export function setPortfolioData(val) {
+  return {
+    type: type.SET_PORTFOLIO_DATA,
+    val
+  }
+}

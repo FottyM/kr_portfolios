@@ -4,7 +4,14 @@ const initialState = {
   data: [],
   error: null,
   message: '',
-  loading: false
+  loading: false,
+  form: {
+    cryptocurrency: null,
+    amount: null,
+    date_of_purchase: Date.now(),
+    wallet_location: '',
+    current_market_value: 'ask api'
+  }
 }
 
 const reducers = (state = initialState, action) => {
@@ -43,11 +50,41 @@ const reducers = (state = initialState, action) => {
       loading: false,
       message: action.message
     }
+
   case type.DELETE_PORTFOLIO_ERROR:
     return {
       ...state,
-      loading: true,
+      loading: false,
       error: action.error
+    }
+  case type.REQUEST_SAVE_PORTFOLIO:
+    return {
+      ...state,
+      loading: true,
+    }
+
+  case type.PORTFOLIO_SAVED_FAILED:
+    return {
+      ...state,
+      loading: false,
+      error: action.error
+    }
+
+  case type.PORTFOLIO_SAVED_SUCCESS:
+    return {
+      ...state,
+      loading: false,
+      message: action.message
+    }
+
+  case type.SET_PORTFOLIO_DATA:
+    return {
+      ...state,
+      loading: false,
+      form: {
+        ...state.form,
+        ...action.val
+      }
     }
 
   default:
