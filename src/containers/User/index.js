@@ -56,7 +56,7 @@ class User extends Component {
         <div className="col-12 py-4">
           <nav className="nav nav-pills  flex-row flex-md-column">
             <Link className="nav-link " to="/dashboard/portfolios">Portfolios</Link>
-            <Link className="nav-link" to="/dashboard/portfolios/new">New Portfolio</Link>
+            <Link className="nav-link" to="/dashboard/portfolios/new">Add Portfolio</Link>
           </nav>
         </div>
       </div>

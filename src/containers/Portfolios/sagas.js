@@ -5,6 +5,9 @@ import castArray from 'lodash/castArray'
 import { REQUEST_USER_PORTFOLIOS, DELETE_PORTFOLIO_REQUEST, REQUEST_SAVE_PORTFOLIO, } from './constants'
 import { portfoliosRequestSuccess, portfoliosRequestError, deletePortfolioSuccess, deletePortfolioError, savePortfolioError, savePortfolioSuccess } from './actions'
 import { BASE_URL } from '../../config/api'
+import getToken from '../../utils/token'
+
+const { user_id, token } = getToken()
 
 const fetchPortfolios = (userId, token) => {
   return axios.get(`${BASE_URL}/users/${userId}/portfolios`,
@@ -18,8 +21,8 @@ const fetchPortfolios = (userId, token) => {
 
 function* getPortfolios(action) {
   try {
-    const userID = yield select(state => state.user.data.id)
-    const response = yield call(fetchPortfolios, userID, action.token)
+
+    const response = yield call(fetchPortfolios, user_id, token)
     const data = yield castArray(response.data)
     yield put(portfoliosRequestSuccess(data))
   } catch (error) {

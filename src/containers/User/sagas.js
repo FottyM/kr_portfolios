@@ -4,6 +4,8 @@ import axios from 'axios'
 import { REQUEST_USER_DETAILS } from './constants'
 import { requestUserDetailsSuccess, requestUserDetailsFail } from './actions'
 import { BASE_URL } from '../../config/api'
+import getToken from '../../utils/token'
+const { user_id, token } = getToken()
 
 const getUser = (id, token) => axios.get(`${BASE_URL}/users/${id}`, {
   headers: {
@@ -13,7 +15,7 @@ const getUser = (id, token) => axios.get(`${BASE_URL}/users/${id}`, {
 
 function* getUserDetails(actoion) {
   try {
-    const response = yield call(getUser, actoion.id, actoion.token)
+    const response = yield call(getUser, user_id, token)
     yield put(requestUserDetailsSuccess(response.data))
   } catch (error) {
     yield put(requestUserDetailsFail({ error }))

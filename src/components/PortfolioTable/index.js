@@ -2,10 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import map from 'lodash/map'
 import isEmpty from 'lodash/isEmpty'
+import moment from 'moment'
 
 const PortfolioTable = ({ data, confirmDelete }) => {
   return (
-    <table className="table">
+    <table className="table table-bordered rounded table-responsive">
       <thead className="thead-dark">
         <tr>
           <th scope="col">Cryptocurrency</th>
@@ -21,7 +22,7 @@ const PortfolioTable = ({ data, confirmDelete }) => {
           <tr key={portfolio.id}>
             <td>{portfolio.cryptocurrency}</td>
             <td>{portfolio.amount}</td>
-            <td>{portfolio.date_of_purchase}</td>
+            <td>{moment(portfolio.created_at).format('DD.MM.YYYY')}</td>
             <td>{portfolio.wallet_location}</td>
             <td>{portfolio.current_market_value}</td>
             <th scope="row" >

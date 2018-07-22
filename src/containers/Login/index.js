@@ -20,9 +20,9 @@ class Login extends Component {
 
   login = (e) => {
     e.preventDefault()
-    const { email, password, error, loading } = this.props.credentials
+    const { email, password } = this.props.credentials
     this.props.dispatch(requestLogin(email, password))
-    if (isEmpty(error) && !loading) this.props.history.push('/dashboard')
+    this.props.history.push('/dashboard')
   }
 
   handleChange = ({ target }) => {

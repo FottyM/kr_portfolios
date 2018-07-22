@@ -1,14 +1,17 @@
+import moment from 'moment'
+
 import * as type from './constants'
+
 
 const initialState = {
   data: [],
   error: null,
-  message: '',
+  messages: '',
   loading: false,
   form: {
     cryptocurrency: null,
     amount: null,
-    date_of_purchase: Date.now(),
+    date_of_purchase: moment(),
     wallet_location: '',
     current_market_value: 'ask api'
   }
@@ -48,7 +51,7 @@ const reducers = (state = initialState, action) => {
     return {
       ...state,
       loading: false,
-      message: action.message
+      messages: { message: action.message }
     }
 
   case type.DELETE_PORTFOLIO_ERROR:
@@ -74,7 +77,7 @@ const reducers = (state = initialState, action) => {
     return {
       ...state,
       loading: false,
-      message: action.message
+      messages: { ...action.message }
     }
 
   case type.SET_PORTFOLIO_DATA:

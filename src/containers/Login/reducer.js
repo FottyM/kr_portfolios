@@ -22,6 +22,7 @@ const reducers = (state = initialState, action) => {
   case type.LOGIN_SUCCESS:
     return {
       ...state,
+      password: '',
       loading: false,
       ...action.payload
     }

@@ -60,7 +60,7 @@ export function reqSavePortfolio(data) {
 export function savePortfolioSuccess(message) {
   return {
     type: type.PORTFOLIO_SAVED_SUCCESS,
-    message
+    ...message
   }
 }
 
