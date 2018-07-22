@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Route, Redirect } from 'react-router-dom'
 
-const SecureRoute = ({ component: Component, loggedIn, ...rest }) => (
+const SecureRoute = ({ component: Component, loggedIn, redirectPath, ...rest }) => (
   <Route
     {...rest}
     render={props =>
@@ -11,7 +11,7 @@ const SecureRoute = ({ component: Component, loggedIn, ...rest }) => (
       ) : (
         <Redirect
           to={{
-            pathname: '/login',
+            pathname: redirectPath,
             state: { from: props.location }
           }}
         />
@@ -24,11 +24,13 @@ const SecureRoute = ({ component: Component, loggedIn, ...rest }) => (
 SecureRoute.propTypes = {
   component: PropTypes.func,
   loggedIn: PropTypes.bool.isRequired,
-  location: PropTypes.any
+  location: PropTypes.any,
+  redirectPath: PropTypes.string
 }
 
 SecureRoute.defaultProps = {
   component: null,
+  redirectPath: '/login'
 }
 
 export default SecureRoute

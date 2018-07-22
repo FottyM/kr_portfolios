@@ -39,6 +39,7 @@ const PortfolioTable = ({ data, confirmDelete }) => {
 }
 
 PortfolioTable.propTypes = {
+  confirmDelete: PropTypes.func.isRequired,
   data: PropTypes.arrayOf(PropTypes.shape({
     cryptocurrency: PropTypes.string,
     amount: PropTypes.string,

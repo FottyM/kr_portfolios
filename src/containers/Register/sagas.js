@@ -4,8 +4,9 @@ import get from 'lodash/get'
 
 import { REQUEST_REGISTER } from './constants'
 import { registerSuccess, registerFailed } from './actions'
+import { BASE_URL } from '../../config/api'
 
-const api = (email, first_name, last_name, password) => axios.post('http://localhost:3001/auth/register', { user: { email, first_name, last_name, password } })
+const api = (email, first_name, last_name, password) => axios.post(`${BASE_URL}/auth/register`, { user: { email, first_name, last_name, password } })
 
 function* register(action) {
   try {
@@ -14,8 +15,10 @@ function* register(action) {
   } catch (error) {
     yield put(registerFailed(
       {
-        message: error.message,
-        ...get(error, 'response.data', null)
+        error: {
+          message: error.message,
+          error: { ...get(error, ['response', 'data'], null) }
+        }
       }))
   }
 }

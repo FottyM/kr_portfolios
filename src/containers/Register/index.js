@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 
 import { requestRegister, setRegisterCredentails } from './actions'
 import Input from '../../components/Input'
+import Spinner from '../../components/Spinner'
+import Alert from '../../components/Alert'
 
 class Register extends Component {
 
@@ -26,25 +28,28 @@ class Register extends Component {
 
   render() {
 
-    const { email, first_name, last_name, password } = this.props.credentials
+    const { email, first_name, last_name, password, loading, error, message } = this.props.credentials
     return (
       <div className="container">
         <div className="row">
-          <div className="col-10 col-md-6 offset-1 offset-md-3 bg-light py-2 rounded" style={{ marginTop: 100 }}>
-            <h2 className='text-danger text-center py-1'>Register</h2>
-            <form onSubmit={this.register} onChange={this.handleChange}>
-              <Input id='first_name' label='First name' name='first_name' value={first_name} placeholder='First name' onChange={this.handleChange} />
+          <div className="col-10 col-md-6 offset-1 offset-md-3 bg-light p-5 rounded" style={{ marginTop: 100 }}>
+            <Spinner loading={loading}>
+              <h2 className='text-danger text-center py-1'>Register</h2>
+              <Alert messages={message ? { message } : error} type={message ? 'success' : 'danger'} />
+              <form onSubmit={this.register} onChange={this.handleChange}>
+                <Input id='first_name' label='First name' name='first_name' value={first_name} placeholder='First name' onChange={this.handleChange} />
 
-              <Input id='last_name' label='Last name' name='last_name' value={last_name} placeholder='Last name' onChange={this.handleChange} />
+                <Input id='last_name' label='Last name' name='last_name' value={last_name} placeholder='Last name' onChange={this.handleChange} />
 
-              <Input id='email' label='Email' name='email' value={email} type='email' placeholder='Enter email' onChange={this.handleChange} />
+                <Input id='email' label='Email' name='email' value={email} type='email' placeholder='Enter email' onChange={this.handleChange} />
 
-              <Input id='password' label='Password' name='password' type='password' value={password} placeholder='Enter password' onChange={this.handleChange} />
-              <div className="d-flex justify-content-between">
-                <button type="submit" className="btn btn-success" onClick={this.register}>Register</button>
-                <Link to='/login' className='btn btn-secondary'>Login </Link>
-              </div>
-            </form>
+                <Input id='password' label='Password' name='password' type='password' value={password} placeholder='Enter password' onChange={this.handleChange} />
+                <div className="d-flex justify-content-between">
+                  <button type="submit" className="btn btn-success" onClick={this.register}>Register</button>
+                  <Link to='/login' className='btn btn-secondary'>Login </Link>
+                </div>
+              </form>
+            </Spinner>
           </div>
         </div>
       </div>

@@ -3,14 +3,14 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
-import { Route, Switch } from 'react-router-dom'
 import isNil from 'lodash/isNil'
 
 import { requestPortfolios, deletePortfolioRequest } from './actions'
-import User from '../User'
-import PortfolioTable from '../../components/PortfolioTable'
 import { tokenSelector } from '../App/selectors'
-import PortfolioForm from './PortfolioForm'
+import Spinner from '../../components/Spinner'
+import PortfolioTable from '../../components/PortfolioTable'
+
+
 
 
 class Portfolios extends Component {
@@ -57,14 +57,14 @@ class Portfolios extends Component {
   }
 
   render() {
-    const { portfolios: { data } } = this.props
-    return (
-      <div className="row mt-3 rounded">
-        <div className="col-12 col-md-10 col-lg-10">
-          <PortfolioTable data={data} confirmDelete={this.confirmDelete} />
-        </div>
+    const { portfolios } = this.props
+    return <div className="row mt-3 rounded ">
+      <div className="col-12">
+        <Spinner loading={portfolios.loading}>
+          <PortfolioTable data={portfolios.data} confirmDelete={this.confirmDelete} />
+        </Spinner>
       </div>
-    )
+    </div>
   }
 }
 

@@ -3,8 +3,9 @@ import axios from 'axios'
 
 import { REQUEST_USER_DETAILS } from './constants'
 import { requestUserDetailsSuccess, requestUserDetailsFail } from './actions'
+import { BASE_URL } from '../../config/api'
 
-const getUser = (id, token) => axios.get(`http://localhost:3001/users/${id}`, {
+const getUser = (id, token) => axios.get(`${BASE_URL}/users/${id}`, {
   headers: {
     Authorization: `Bearer ${token}`
   }

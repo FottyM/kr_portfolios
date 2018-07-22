@@ -13,7 +13,7 @@ export function requestRegister({ email, password, first_name, last_name }) {
 export function registerSuccess(message) {
   return {
     type: type.REGISTER_SUCCESS,
-    message
+    ...message
   }
 }
 

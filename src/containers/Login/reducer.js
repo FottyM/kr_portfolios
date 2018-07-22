@@ -30,7 +30,7 @@ const reducers = (state = initialState, action) => {
     return {
       ...state,
       loading: false,
-      error: action.error
+      error: { ...action.error }
     }
 
   case type.SET_LOGIN_CREDENTIALS:

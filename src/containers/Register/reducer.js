@@ -24,12 +24,14 @@ const reducer = (state = initialState, action) => {
     return {
       ...state,
       loading: false,
+      error: null,
       message: action.message
     }
 
   case type.REGISTER_FAILED:
     return {
       ...state,
+      message: '',
       loading: false,
       error: action.error
     }

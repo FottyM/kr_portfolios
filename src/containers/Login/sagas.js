@@ -4,8 +4,9 @@ import get from 'lodash/get'
 
 import { REQUEST_LOGIN } from './constants'
 import { loginfailed, loginSuccess } from './actions'
+import { BASE_URL } from '../../config/api'
 
-const api = (email, password) => axios.post('http://localhost:3001/auth/login', { user: { email, password } })
+const api = (email, password) => axios.post(`${BASE_URL}/auth/login`, { user: { email, password } })
 
 function* login(action) {
   try {
@@ -16,7 +17,7 @@ function* login(action) {
   } catch (error) {
     yield put(loginfailed({
       error: {
-        ...get(error.response, 'data', null),
+        ...get(error, ['response', 'data'], null),
         message: error.message
       }
     }))

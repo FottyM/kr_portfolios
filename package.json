@@ -15,6 +15,7 @@
     "react": "^16.4.1",
     "react-confirm-alert": "^2.0.5",
     "react-dom": "^16.4.1",
+    "react-epic-spinners": "^0.2.1",
     "react-gravatar": "^2.6.3",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",

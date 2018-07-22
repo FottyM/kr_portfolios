@@ -4,9 +4,10 @@ import castArray from 'lodash/castArray'
 
 import { REQUEST_USER_PORTFOLIOS, DELETE_PORTFOLIO_REQUEST, REQUEST_SAVE_PORTFOLIO, } from './constants'
 import { portfoliosRequestSuccess, portfoliosRequestError, deletePortfolioSuccess, deletePortfolioError, savePortfolioError, savePortfolioSuccess } from './actions'
+import { BASE_URL } from '../../config/api'
 
 const fetchPortfolios = (userId, token) => {
-  return axios.get(`http://localhost:3001/users/${userId}/portfolios`,
+  return axios.get(`${BASE_URL}/users/${userId}/portfolios`,
     {
       headers: {
         Authorization: `Bearer ${token}`
@@ -27,7 +28,7 @@ function* getPortfolios(action) {
 }
 
 const delProtfolio = (userId, id, token) => {
-  return axios.delete(`http://localhost:3001/users/${userId}/portfolios/${id}`,
+  return axios.delete(`${BASE_URL}/users/${userId}/portfolios/${id}`,
     {
       headers: {
         Authorization: `Bearer ${token}`
@@ -47,7 +48,7 @@ function* deletePortfolio(action) {
 }
 
 const savePort = (userId, data, token) => {
-  return axios.post(`http://localhost:3001/users/${userId}/portfolios`,
+  return axios.post(`${BASE_URL}/users/${userId}/portfolios`,
     { portfolio: { ...data } },
     { headers: { Authorization: `Bearer ${token}` } }
   )
