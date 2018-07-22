@@ -11,6 +11,7 @@ import SecureRoute from '../../components/SecureRoute'
 import Portfolios from '../../containers/Portfolios'
 import Navbar from '../../components/Navbar'
 import { tokenSelector } from './selectors'
+import Dashboad from '../Dashboard'
 
 class App extends Component {
 
@@ -36,8 +37,8 @@ class App extends Component {
               path='/register'
               component={Register} />
             <SecureRoute
-              path='/portfolios'
-              component={Portfolios}
+              path='/dashboard'
+              component={Dashboad}
               loggedIn={loggedIn}
             />
           </Switch>

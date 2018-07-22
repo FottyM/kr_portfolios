@@ -26,39 +26,44 @@ class PortfolioForm extends Component {
   render() {
     const { amount, wallet_locaion, current_market_value } = this.props.form
     return (
-      <form onChange={this.handleChange} onSubmit={this.save}>
-        <SelectBox
-          name='cryptocurrency'
-          id='select-box'
-          label='Cryptocurrency'
-          options={[
-            { key: '', value: 'choose one' },
-            { key: 'ETH', value: 'Ethereum' },
-            { key: 'BTC', value: 'Bitcoin' },
-            { key: 'XRP', value: 'Ripple' },
-          ]}
-          onChange={this.handleChange} />
+      <div className="row">
+        <div className="col-10 offset-1 col-md-4 offset-md-1 p-4 bg-light rounded mt-3">
+          <h4 className='py-2'>Add portfolio</h4>
+          <form onChange={this.handleChange} onSubmit={this.save}>
+            <SelectBox
+              name='cryptocurrency'
+              id='select-box'
+              label='Cryptocurrency'
+              options={[
+                { key: '', value: 'choose one' },
+                { key: 'ETH', value: 'Ethereum' },
+                { key: 'BTC', value: 'Bitcoin' },
+                { key: 'XRP', value: 'Ripple' },
+              ]}
+              onChange={this.handleChange} />
 
-        <Input
-          label='Amount' type='number'
-          id='amount' name='amount'
-          placeholder='10' value={amount}
-          onChange={this.handleChange} />
+            <Input
+              label='Amount' type='number'
+              id='amount' name='amount'
+              placeholder='10' value={amount}
+              onChange={this.handleChange} />
 
-        <Input
-          id='wallet-location' label='Wallet location'
-          name='wallet_location' placeholder='Wallet Location'
-          value={wallet_locaion}
-          onChange={this.handleChange} />
+            <Input
+              id='wallet-location' label='Wallet location'
+              name='wallet_location' placeholder='Wallet Location'
+              value={wallet_locaion}
+              onChange={this.handleChange} />
 
-        <Input
-          id='current_market_value' label='Current market value'
-          name='current_market_value'
-          value={current_market_value} disabled
-          onChange={this.handleChange} />
+            <Input
+              id='current_market_value' label='Current market value'
+              name='current_market_value'
+              value={current_market_value} disabled
+              onChange={this.handleChange} />
 
-        <button className='btn btn-success' onSubmit={this.save}> Save </button>
-      </form>
+            <button className='btn btn-success' onSubmit={this.save}> Save </button>
+          </form>
+        </div>
+      </div>
     )
   }
 }

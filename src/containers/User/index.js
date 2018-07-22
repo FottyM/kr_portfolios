@@ -43,8 +43,8 @@ class User extends Component {
         <div className="w-100" />
         <div className="col-12 py-4">
           <nav className="nav nav-pills flex-column">
-            <Link className="nav-link " to="/portfolios">Portfolios</Link>
-            <Link className="nav-link" to="/portfolios/new">New Portfolio</Link>
+            <Link className="nav-link " to="/dashboard/portfolios">Portfolios</Link>
+            <Link className="nav-link" to="/dashboard/portfolios/new">New Portfolio</Link>
           </nav>
         </div>
       </div>

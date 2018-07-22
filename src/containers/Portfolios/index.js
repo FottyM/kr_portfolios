@@ -57,25 +57,11 @@ class Portfolios extends Component {
   }
 
   render() {
-    const { portfolios: { data }, loggedIn, match } = this.props
+    const { portfolios: { data } } = this.props
     return (
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-12 col-md-2 col-lg-2">
-            <User />
-          </div>
-          <div className="col-12 col-md-10 col-lg-10 mt-3">
-            <Switch>
-              <Route
-                exact={true}
-                path={`${match.url}/`}
-                render={(props) => <PortfolioTable {...props} data={data} confirmDelete={this.confirmDelete} />}
-                loggedIn={loggedIn} />
-              <Route
-                path={`${match.url}/new`}
-                component={PortfolioForm} />
-            </Switch>
-          </div>
+      <div className="row mt-3 rounded">
+        <div className="col-12 col-md-10 col-lg-10">
+          <PortfolioTable data={data} confirmDelete={this.confirmDelete} />
         </div>
       </div>
     )

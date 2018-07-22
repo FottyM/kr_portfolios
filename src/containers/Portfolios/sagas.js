@@ -27,7 +27,7 @@ function* getPortfolios(action) {
 }
 
 const delProtfolio = (userId, id, token) => {
-  return axios.delete(`http://localhost:3001/users/${userId}/portfolios`,
+  return axios.delete(`http://localhost:3001/users/${userId}/portfolios/${id}`,
     {
       headers: {
         Authorization: `Bearer ${token}`
