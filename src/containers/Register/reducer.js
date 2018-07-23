@@ -6,7 +6,7 @@ const initialState = {
   last_name: '',
   password: '',
   error: null,
-  message: '',
+  messages: '',
   loading: false
 }
 
@@ -25,13 +25,13 @@ const reducer = (state = initialState, action) => {
       ...state,
       loading: false,
       error: null,
-      message: action.message
+      messages: { ...action.message }
     }
 
   case type.REGISTER_FAILED:
     return {
       ...state,
-      message: '',
+      messages: '',
       loading: false,
       error: action.error
     }

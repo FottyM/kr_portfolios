@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import isNil from 'lodash/isNil'
-import isEmpty from 'lodash/isEmpty'
 import { Link } from 'react-router-dom'
 
 

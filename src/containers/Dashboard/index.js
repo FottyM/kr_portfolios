@@ -3,14 +3,15 @@ import { Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import isEmpty from 'lodash/isEmpty'
+import moment from 'moment'
 
 import User from '../User'
 import Portfolios from '../Portfolios'
 import PortfoliosForm from '../Portfolios/PortfolioForm'
 import { requestPortfolios } from '../Portfolios/actions'
 import { requestUserDetails } from '../User/actions'
-import { tokenSelector } from '../App/selectors'
 import getToken from '../../utils/token'
+import { logout } from '../../utils/logout'
 
 class Dashboad extends Component {
 
@@ -21,17 +22,25 @@ class Dashboad extends Component {
     authToken: PropTypes.string
   }
 
-  componentDidMount = () => {
-    const { token, user_id } = getToken()
-
-    if (!isEmpty(token)) {
+  checkAuth = () => {
+    const { token, user_id, exp } = getToken()
+    const timeDiff = moment(exp).diff(Date.now(), 'millisecond')
+    if (!isEmpty(token) && timeDiff <= 0) {
       this.props.dispatch(requestPortfolios(user_id))
       this.props.dispatch(requestUserDetails(user_id))
     } else {
+      logout(this.props.history.push)
       this.props.history.push('/login')
     }
-
   }
+  componentDidMount = () => {
+    this.checkAuth()
+  }
+
+  componentDidUpdate = () => {
+    this.checkAuth()
+  }
+
 
   render() {
     const { match } = this.props
@@ -53,9 +62,8 @@ class Dashboad extends Component {
     )
   }
 }
-const mapStateToProps = (state) => ({
-  authToken: tokenSelector(state)
-})
+
+const mapStateToProps = (state) => ({})
 
 
 export default connect(mapStateToProps)(Dashboad)

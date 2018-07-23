@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import get from 'lodash/get'
 
 import { requestRegister, setRegisterCredentails } from './actions'
 import Input from '../../components/Input'
@@ -12,7 +13,8 @@ class Register extends Component {
 
   static propTypes = {
     credentials: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired
   }
 
   register = e => {
@@ -26,16 +28,26 @@ class Register extends Component {
     this.props.dispatch(setRegisterCredentails(val))
   }
 
+  componentDidUpdate = () => {
+    const { messages } = this.props.credentials
+    const message = get(messages, ['message'], null)
+    const waitRedirect = () => this.props.history.push('/login')
+    if (message === 'user registration successful') {
+      setTimeout(waitRedirect, 1500)
+    }
+  }
+
+
   render() {
 
-    const { email, first_name, last_name, password, loading, error, message } = this.props.credentials
+    const { email, first_name, last_name, password, loading, error, messages } = this.props.credentials
     return (
       <div className="container">
         <div className="row">
           <div className="col-10 col-md-6 offset-1 offset-md-3 bg-light p-5 rounded" style={{ marginTop: 100 }}>
             <Spinner loading={loading}>
-              <h2 className='text-danger text-center py-1'>Register</h2>
-              <Alert messages={message ? { message } : error} type={message ? 'success' : 'danger'} />
+              <h2 className='text-center text-success py-1'>Register</h2>
+              <Alert messages={error ? error : { ...messages }} type={error ? 'danger' : 'success'} />
               <form onSubmit={this.register} onChange={this.handleChange}>
                 <Input id='first_name' label='First name' name='first_name' value={first_name} placeholder='First name' onChange={this.handleChange} />
 
