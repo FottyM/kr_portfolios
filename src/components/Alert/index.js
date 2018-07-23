@@ -2,14 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import isEmpty from 'lodash/isEmpty'
 import get from 'lodash/get'
-import map from 'lodash/map'
-import castArray from 'lodash/castArray'
+
 
 const Alert = ({ type, messages }) => {
 
   const errorMessage = get(messages, ['error', 'message'], '')
   const message = get(messages, ['message'], '')
   const restMessages = get(messages, ['error', 'error'], {})
+  console.log(messages)
   return (
     <React.Fragment>
       {

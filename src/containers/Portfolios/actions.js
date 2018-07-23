@@ -1,13 +1,11 @@
 import * as type from './constants'
 import getToken from '../../utils/token'
 
-const { user_id, token, exp } = getToken()
+const { user_id, token } = getToken()
 
 export function requestPortfolios() {
   return {
-    type: type.REQUEST_USER_PORTFOLIOS,
-    userId: user_id,
-    token: token
+    type: type.REQUEST_USER_PORTFOLIOS
   }
 }
 
@@ -60,7 +58,7 @@ export function reqSavePortfolio(data) {
 export function savePortfolioSuccess(message) {
   return {
     type: type.PORTFOLIO_SAVED_SUCCESS,
-    ...message
+    message
   }
 }
 
