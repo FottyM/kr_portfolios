@@ -1,6 +1,6 @@
 import jwtDecode from 'jwt-decode'
 
-const getToken = () => {
+export const getToken = () => {
   let token
   try {
     token = localStorage.getItem('access_token')

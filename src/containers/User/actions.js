@@ -1,12 +1,12 @@
 import * as type from './constants'
 import getToken from '../../utils/token'
 
-const { user_id, token, exp } = getToken()
+const { user_id, token } = getToken()
 
-export const requestUserDetails = () => {
+export const requestUserDetails = (user_id) => {
   return {
     type: type.REQUEST_USER_DETAILS,
-    id: user_id,
+    user_id,
     token: token
   }
 }

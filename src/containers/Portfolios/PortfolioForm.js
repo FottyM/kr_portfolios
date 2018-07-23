@@ -1,19 +1,23 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import isEmpty from 'lodash/isEmpty'
 
 import Input from '../../components/Input'
 import SelectBox from '../../components/SelectBox'
 import Spinner from '../../components/Spinner'
 import Alert from '../../components/Alert'
 import { setPortfolioData, reqSavePortfolio } from './actions'
+import { reqConversions } from './cryptos/actions'
 
 class PortfolioForm extends Component {
 
   static propTypes = {
     portfolios: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired
+  }
+
+  componentDidMount = () => {
+    this.props.dispatch(reqConversions())
   }
 
   save = (e) => {
@@ -42,9 +46,9 @@ class PortfolioForm extends Component {
                 label='Cryptocurrency'
                 options={[
                   { key: '', value: 'choose one' },
-                  { key: 'ETH', value: 'Ethereum' },
-                  { key: 'BTC', value: 'Bitcoin' },
-                  { key: 'XRP', value: 'Ripple' },
+                  { key: 'Ethereum', value: 'Ethereum' },
+                  { key: 'Bitcoin', value: 'Bitcoin' },
+                  { key: 'Ripple', value: 'Ripple' },
                 ]}
                 onChange={this.handleChange} />
 

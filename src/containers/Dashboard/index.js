@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import isEmpty from 'lodash/isEmpty'
+import isNil from 'lodash/isNil'
 import moment from 'moment'
 
 import User from '../User'
@@ -12,6 +13,7 @@ import { requestPortfolios } from '../Portfolios/actions'
 import { requestUserDetails } from '../User/actions'
 import getToken from '../../utils/token'
 import { logout } from '../../utils/logout'
+import { userIdSelector } from '../App/selectors'
 
 class Dashboad extends Component {
 
@@ -23,9 +25,9 @@ class Dashboad extends Component {
   }
 
   checkAuth = () => {
-    const { token, user_id, exp } = getToken()
+    const { user_id, exp } = getToken()
     const timeDiff = moment(exp).diff(Date.now(), 'millisecond')
-    if (!isEmpty(token) && timeDiff <= 0) {
+    if (!isNil(user_id) && timeDiff <= 0) {
       this.props.dispatch(requestPortfolios(user_id))
       this.props.dispatch(requestUserDetails(user_id))
     } else {
@@ -63,7 +65,9 @@ class Dashboad extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+  user_id: userIdSelector(state)
+})
 
 
 export default connect(mapStateToProps)(Dashboad)

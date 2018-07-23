@@ -1,8 +1,11 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { logout } from '../../utils/logout'
+import isNil from 'lodash/isNil'
+import { getToken } from '../../utils/token'
 
-const Navbar = ({ auth, history }) => {
+const Navbar = () => {
+  const { token } = getToken()
+  const auth = !isNil(token)
   return (
     <nav className="navbar navbar-expand-lg navbar navbar-dark bg-dark">
       <Link className="navbar-brand" to="/dashboard">Project Kr</Link>
@@ -12,19 +15,18 @@ const Navbar = ({ auth, history }) => {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav ml-auto">
           <li className="nav-item active">
-            <Link className="nav-link" to="/dashboard">Home </Link>
+            {auth && <Link className="nav-link" to="/dashboard">Home </Link>}
           </li>
-          <li className="nav-item active">
-            <Link className="nav-link" to="/login"> Login </Link>
-          </li>
-          <li className="nav-item active">
-            <Link className="nav-link" to="/register"> Register </Link>
-          </li>
-          <li className="nav-item active">
-            <button
-              className='btn btn-outline-danger'
-              onClick={() => logout(history.push)}>Logout</button>
-          </li>
+          {!auth && (
+            <React.Fragment>
+              <li className="nav-item active">
+                <Link className="nav-link" to="/login"> Login </Link>
+              </li>
+              <li className="nav-item active">
+                <Link className="nav-link" to="/register"> Register </Link>
+              </li>
+            </React.Fragment>
+          )}
         </ul>
       </div>
     </nav>

@@ -6,7 +6,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css'
 import isNil from 'lodash/isNil'
 
 import { requestPortfolios, deletePortfolioRequest } from './actions'
-import { tokenSelector } from '../App/selectors'
+import { tokenSelector, userIdSelector } from '../App/selectors'
 import Spinner from '../../components/Spinner'
 import PortfolioTable from '../../components/PortfolioTable'
 
@@ -19,15 +19,19 @@ class Portfolios extends Component {
     dispatch: PropTypes.func.isRequired,
     portfolios: PropTypes.object.isRequired,
     loggedIn: PropTypes.bool.isRequired,
-    match: PropTypes.object.isRequired
+    match: PropTypes.object.isRequired,
+    user_id: PropTypes.string.isRequired
   }
 
   componentDidMount = () => {
-    this.props.dispatch(requestPortfolios())
+    const { user_id } = this.props
+    this.props.dispatch(requestPortfolios(user_id))
   }
 
   deleteItem = (id) => {
     this.props.dispatch(deletePortfolioRequest(id))
+    const { user_id } = this.props
+    this.props.dispatch(requestPortfolios(user_id))
   }
 
   confirmDelete = (id) => {
@@ -70,7 +74,8 @@ class Portfolios extends Component {
 
 const mapStateToProps = (state) => ({
   portfolios: state.portfolios,
-  loggedIn: !isNil(tokenSelector(state))
+  loggedIn: !isNil(tokenSelector(state)),
+  user_id: userIdSelector(state)
 })
 
 export default connect(mapStateToProps)(Portfolios)

@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect'
+import decode from 'jwt-decode'
 
 const stateToken = state => state.login.access_token
 
@@ -11,9 +12,14 @@ const localToken = () => {
   }
 }
 
-const tokenSelector = createSelector(
+export const tokenSelector = createSelector(
   stateToken, localToken,
   (stateToken, localToken) => stateToken ? stateToken : localToken
 )
 
-export { tokenSelector }
+export const userIdSelector = createSelector(
+  tokenSelector, (token) => {
+    const { user_id } = decode(token)
+    return user_id ? user_id : null
+  }
+)
