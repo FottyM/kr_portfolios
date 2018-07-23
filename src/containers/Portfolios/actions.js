@@ -3,9 +3,10 @@ import getToken from '../../utils/token'
 
 const { user_id, token } = getToken()
 
-export function requestPortfolios() {
+export function requestPortfolios(user_id) {
   return {
-    type: type.REQUEST_USER_PORTFOLIOS
+    type: type.REQUEST_USER_PORTFOLIOS,
+    user_id
   }
 }
 

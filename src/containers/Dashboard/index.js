@@ -10,6 +10,7 @@ import PortfoliosForm from '../Portfolios/PortfolioForm'
 import { requestPortfolios } from '../Portfolios/actions'
 import { requestUserDetails } from '../User/actions'
 import { tokenSelector } from '../App/selectors'
+import getToken from '../../utils/token'
 
 class Dashboad extends Component {
 
@@ -21,13 +22,13 @@ class Dashboad extends Component {
   }
 
   componentDidMount = () => {
-    const { authToken } = this.props
+    const { token, user_id } = getToken()
 
-    if (!isEmpty(authToken)) {
-      this.props.dispatch(requestPortfolios())
-      this.props.dispatch(requestUserDetails())
+    if (!isEmpty(token)) {
+      this.props.dispatch(requestPortfolios(user_id))
+      this.props.dispatch(requestUserDetails(user_id))
     } else {
-      this.history.push('/')
+      this.props.history.push('/login')
     }
 
   }

@@ -7,7 +7,7 @@ import { portfoliosRequestSuccess, portfoliosRequestError, deletePortfolioSucces
 import { BASE_URL } from '../../config/api'
 import getToken from '../../utils/token'
 
-const { user_id, token } = getToken()
+const { token } = getToken()
 
 const fetchPortfolios = (userId, token) => {
   return axios.get(`${BASE_URL}/users/${userId}/portfolios`,
@@ -21,8 +21,7 @@ const fetchPortfolios = (userId, token) => {
 
 function* getPortfolios(action) {
   try {
-
-    const response = yield call(fetchPortfolios, user_id, token)
+    const response = yield call(fetchPortfolios, action.user_id, token)
     const data = yield castArray(response.data)
     yield put(portfoliosRequestSuccess(data))
   } catch (error) {

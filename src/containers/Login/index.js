@@ -10,6 +10,7 @@ import { setLoginCredentials, requestLogin } from './actions'
 import Input from '../../components/Input'
 import Alert from '../../components/Alert'
 import Spinner from '../../components/Spinner'
+import getToken from '../../utils/token'
 class Login extends Component {
 
   static propTypes = {
@@ -20,9 +21,9 @@ class Login extends Component {
 
   login = (e) => {
     e.preventDefault()
-    const { email, password } = this.props.credentials
+    const { email, password, loggedIn } = this.props.credentials
     this.props.dispatch(requestLogin(email, password))
-    this.props.history.push('/dashboard')
+    if (loggedIn) this.props.history.push('/dashboard')
   }
 
   handleChange = ({ target }) => {
@@ -30,12 +31,11 @@ class Login extends Component {
     this.props.dispatch(setLoginCredentials(val))
   }
 
-  componentDidMount = () => {
-    const { token } = this.props.credentials
-    if (!isNil(token)) {
-      this.props.history.push('/portfolios')
-    }
+  componentDidUpdate = () => {
+    const { token } = getToken()
+    if (!isNil(token)) this.props.history.push('/dashboard')
   }
+
 
   render() {
     const { email, password, loading, error } = this.props.credentials
